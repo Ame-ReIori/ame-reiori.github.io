@@ -14,7 +14,25 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/test/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/untagged/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
