@@ -5,15 +5,16 @@
     <link>http://localhost:1313/post/</link>
     <description>Recent content in Posts on Duel</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Thu, 03 Mar 2022 14:41:45 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>http://localhost:1313/post/test/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>CryptDB</title>
+      <link>http://localhost:1313/post/cryptdb/</link>
+      <pubDate>Thu, 03 Mar 2022 14:41:45 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/test/</guid>
-      <description>this is a test. $a^b$
-1  int main()   </description>
+      <guid>http://localhost:1313/post/cryptdb/</guid>
+      <description>Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper consider an adversary outside that wants to thieve the data in database.</description>
     </item>
     
   </channel>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CryptDB - Duel</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Ame-ReIori" /><meta name="description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper consider an adversary outside that wants to thieve the data in database." /><meta name="keywords" content="Private computation" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.83.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cryptdb/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CryptDB" />
+<meta property="og:description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper consider an adversary outside that wants to thieve the data in database." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cryptdb/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-03T14:41:45&#43;08:00" />
+<meta property="article:modified_time" content="2022-03-03T14:41:45&#43;08:00" />
+
+<meta itemprop="name" content="CryptDB">
+<meta itemprop="description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper consider an adversary outside that wants to thieve the data in database."><meta itemprop="datePublished" content="2022-03-03T14:41:45&#43;08:00" />
+<meta itemprop="dateModified" content="2022-03-03T14:41:45&#43;08:00" />
+<meta itemprop="wordCount" content="1060">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CryptDB"/>
+<meta name="twitter:description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper consider an adversary outside that wants to thieve the data in database."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Ame&#39;s Golden House</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Ame&#39;s Golden House</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CryptDB</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-03 </span>
+        
+          <span class="more-meta"> 1060 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#problem-description">Problem Description</a>
+      <ul>
+        <li><a href="#challenages-and-main-idea">Challenages and main idea</a></li>
+      </ul>
+    </li>
+    <li><a href="#system-overview">System Overview</a>
+      <ul>
+        <li><a href="#threat-1">Threat 1</a></li>
+        <li><a href="#threat2">Threat2</a></li>
+      </ul>
+    </li>
+    <li><a href="#query-over-encrypted-data">Query over encrypted data</a>
+      <ul>
+        <li><a href="#sql-aware-encryption">SQL-aware encryption</a>
+          <ul>
+            <li><a href="#random-rnd">Random (RND)</a></li>
+            <li><a href="#deterministic-det">Deterministic (DET)</a></li>
+            <li><a href="#order-preserving-encryption-ope">Order-preserving encryption (OPE)</a></li>
+            <li><a href="#homomorphic-encryption-hom">Homomorphic encryption (HOM)</a></li>
+            <li><a href="#join-join-and-ope-join">Join (JOIN and OPE-JOIN)</a></li>
+            <li><a href="#word-search-search">Word search (SEARCH)</a></li>
+          </ul>
+        </li>
+        <li><a href="#adjustable-query-based-encryption">Adjustable query-based encryption</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="problem-description">Problem Description</h1>
+<p>The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.</p>
+<p>However, the paper consider an adversary outside that wants to thieve the data in database. The adversary may have access to database, snoop on private data, or even access all data on disk and in memory. The problem is how to avoid the theft. Considering the cost on system deployment and client-side computation, the paper presents CryptDB, a system that explores an intermediate design point to provide confidentiality for applications that use database management systems, to solve it.</p>
+<p>There are two threats which CryptDB should address.</p>
+<ul>
+<li>If the adversary is a curious database administrator (DBA) , how to avoid him from learning private data.</li>
+<li>If the adversary gets complete control of application and servers, how to avoid him from learning private data.</li>
+</ul>
+<p>In the first case, CryptDB can prevent DBA from learning any private data through some encryption schema; In the second case, <strong>CryptDB cannot provide any guarantees for users that are logged into the application during an attack, but can still ensure the confidentially of logger-out users' data</strong>.</p>
+<p>It seems that CryptDB provides a good schema to solve problems in first case. However, there are still several problems, including computation and communication cost. Besides, CryptDB doesn&rsquo;t provide a complete schema for the second case.</p>
+<p>In this blog, we may follow CryptDB&rsquo;s idea and make a sight on how it solves these problems.</p>
+<h2 id="challenages-and-main-idea">Challenages and main idea</h2>
+<p>There are two challenages when solving the threats.</p>
+<ul>
+<li>The first lies in the tension between minimizing the amount of confidential information revealed to the DBMS server and the ability to efficiently execute a variety of queries.</li>
+<li>The second is to minimize the amount of data leaked when an adversary compromises the application server in addition to the DBMS server.</li>
+</ul>
+<p>CryptDB addresses these challenages with three key ideas:</p>
+<ul>
+<li>The first is executing SQL queries over encrypted data with SQL-aware encryption. Different private operations can be implemented with different encryption schemas. For example, SUM can be implemented with homomorphic encryption.</li>
+<li>The second is adjustable query-based encryption. I think it is the same as the first idea. We customize each operation with different encryption schema and encrypt data with these schemas, then we should have a scheduler make a reasonable plan for adjusting operations with schema.</li>
+<li>The third is chain encryption keys to user password. Actually, it is a kind of access control.</li>
+</ul>
+<h1 id="system-overview">System Overview</h1>
+<p>The construction is as followed. CryptDB add database proxy to the origin system, which encrypts and decrypts all data, and changes query operations. There is some strategies when encrypting data due to the second threat. Then, we will make a sight on  what the security and brief approach is in two threats.</p>
+<p><img src="/img/image-20220304162347255.png" alt="image-20220304162347255"></p>
+<h2 id="threat-1">Threat 1</h2>
+<p>Threat 1 is the situation where the adversary has full access to the data stored in the DBMS server. The paper consider the adversary to be passive, or we say, semi-honest. CryptDB protects data content and names of columns and tables, but it doesn&rsquo;t protect overall table structure, the number of rows, the type of columns, or the approximate size of data in bytes.</p>
+<p>CryptDB combines SQL-aware encryption and adjustable query-based encryption, making the former one adjust dynamically to the query presented.</p>
+<h2 id="threat2">Threat2</h2>
+<p>In this threat, the adversary compromises data proxy, meaning that he can get the encryption key. I think CryptDB wants to protect data of any user. However, now it can only protect data of logged-out users due to its approach. CryptDB encrypts different data item with different keys. Data of inactive users would be encrypted with keys not available to the adversary.</p>
+<h1 id="query-over-encrypted-data">Query over encrypted data</h1>
+<p>CryptDB combines SQL-aware encryption and adjustable query-based encryption. The former enables us to apply different operations on encrypted data, while the later enables us to schedule the encryption schema.</p>
+<h2 id="sql-aware-encryption">SQL-aware encryption</h2>
+<h3 id="random-rnd">Random (RND)</h3>
+<p>It is very simple. Using AES-CBC or other IND-CPA encryption schema can make the ciphertext seemed to be random. In CryptDB, they use Blowfish for integer values and AES for others.</p>
+<h3 id="deterministic-det">Deterministic (DET)</h3>
+<p>DET, which should be a PRP, maps the same value to the same ciphertext, allowing the server to perform equality checks, which means it can perform selects with equality predicates, equality joins, GROUP BY, COUNT, DISTINCT, etc. In CryptDB, they use AES with a variant of the CMC mode.</p>
+<h3 id="order-preserving-encryption-ope">Order-preserving encryption (OPE)</h3>
+<p>OPE remains value&rsquo;s order on ciphertext. For example, if $x &lt; y$, then $OPE_{k}(x) &lt; OPE_{k}(y)$. Therefore, the server can perform ORDER BY, MIN, MAX, SORT, etc.</p>
+<h3 id="homomorphic-encryption-hom">Homomorphic encryption (HOM)</h3>
+<p>Like OPE, HOM allows the server to perform some arithmetic operations. For example, With Paillier, an additive homomorphic encryption, we have $HOM_{k}(x) \cdot HOM_{k}(y) = HOM_{k}(x+y)$.</p>
+<h3 id="join-join-and-ope-join">Join (JOIN and OPE-JOIN)</h3>
+<p>Join can be classified as equi-join and range join. DET can address the former one. However, due to CryptDB&rsquo;s approach for threat 2, the columns joined may not be encrypted with the same key. The paper proposes a new cryptographic primitive, called JOIN-ADJ (<em>adjustable join</em>), which allows the DBMS server to adjust the key of each column at runtime.</p>
+<p>The main aim of JOIN-ADJ is converting columns encrypted with different keys to the ones encrypted with the same key. It can be implemented with power. The main idea is as followed:
+$$
+(x^k)^\frac{k'}{k} = x^{k'}
+$$
+CryptDB gives the construction as followed:
+$$
+JOIN-ADJ_{K}(v) = P^{K \cdot PRF_{K_0}(v)}
+$$
+where $K$ is the key for columns or tables and $K_0$ is the master key which may be different asccording to users. And the following equation shows how to convert $JOIN-ADJ_{K}(v)$ to $JOIN-ADJ_{k'}(v)$:
+$$
+(JOIN-ADJ_{K}(v))^{\Delta K} = (JOIN-ADJ_{K}(v))^{\frac{K'}{K}} = (P^{K \cdot PRF_{K_0}(v)})^{\frac{K'}{K}} = P^{K' \cdot PRF_{K_0}(v)}
+$$
+By the way, with elliptic curve, the computation and storage cost can be decreased. CryptDB implements the functionality with following steps:</p>
+<ol>
+<li>The proxy calculates $\Delta K = \frac{K'}{K}$, then sends it to the DBMS server</li>
+<li>The DBMS server uses UDFs to update the corresponding column</li>
+</ol>
+<h3 id="word-search-search">Word search (SEARCH)</h3>
+<p>SEARCH makes CryptDB support LIKE operator. And the authors only implement the former schema, and support full-word search.</p>
+<h2 id="adjustable-query-based-encryption">Adjustable query-based encryption</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Ame-ReIori</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Ame-ReIori</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
