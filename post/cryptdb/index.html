@@ -52,7 +52,7 @@ However, the paper consider an adversary outside that wants to thieve the data i
 <meta itemprop="description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
 However, the paper consider an adversary outside that wants to thieve the data in database."><meta itemprop="datePublished" content="2022-03-03T14:41:45&#43;08:00" />
 <meta itemprop="dateModified" content="2022-03-03T14:41:45&#43;08:00" />
-<meta itemprop="wordCount" content="1060">
+<meta itemprop="wordCount" content="1650">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CryptDB"/>
 <meta name="twitter:description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
@@ -134,8 +134,8 @@ However, the paper consider an adversary outside that wants to thieve the data i
       <div class="post-meta">
         <span class="post-time"> 2022-03-03 </span>
         
-          <span class="more-meta"> 1060 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 1650 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -156,7 +156,7 @@ However, the paper consider an adversary outside that wants to thieve the data i
         <li><a href="#threat2">Threat2</a></li>
       </ul>
     </li>
-    <li><a href="#query-over-encrypted-data">Query over encrypted data</a>
+    <li><a href="#query-over-encrypted-data">Query Over Encrypted Data</a>
       <ul>
         <li><a href="#sql-aware-encryption">SQL-aware encryption</a>
           <ul>
@@ -169,8 +169,16 @@ However, the paper consider an adversary outside that wants to thieve the data i
           </ul>
         </li>
         <li><a href="#adjustable-query-based-encryption">Adjustable query-based encryption</a></li>
+        <li><a href="#executing-over-encrypted-data">Executing over encrypted data</a>
+          <ul>
+            <li><a href="#read">Read</a></li>
+            <li><a href="#write">Write</a></li>
+          </ul>
+        </li>
+        <li><a href="#improving-security-and-performance">Improving security and performance</a></li>
       </ul>
     </li>
+    <li><a href="#multiple-principals">MULTIPLE PRINCIPALS</a></li>
   </ul>
 </nav>
   </div>
@@ -207,7 +215,7 @@ However, the paper consider an adversary outside that wants to thieve the data i
 <p>CryptDB combines SQL-aware encryption and adjustable query-based encryption, making the former one adjust dynamically to the query presented.</p>
 <h2 id="threat2">Threat2</h2>
 <p>In this threat, the adversary compromises data proxy, meaning that he can get the encryption key. I think CryptDB wants to protect data of any user. However, now it can only protect data of logged-out users due to its approach. CryptDB encrypts different data item with different keys. Data of inactive users would be encrypted with keys not available to the adversary.</p>
-<h1 id="query-over-encrypted-data">Query over encrypted data</h1>
+<h1 id="query-over-encrypted-data">Query Over Encrypted Data</h1>
 <p>CryptDB combines SQL-aware encryption and adjustable query-based encryption. The former enables us to apply different operations on encrypted data, while the later enables us to schedule the encryption schema.</p>
 <h2 id="sql-aware-encryption">SQL-aware encryption</h2>
 <h3 id="random-rnd">Random (RND)</h3>
@@ -240,6 +248,53 @@ By the way, with elliptic curve, the computation and storage cost can be decreas
 <h3 id="word-search-search">Word search (SEARCH)</h3>
 <p>SEARCH makes CryptDB support LIKE operator. And the authors only implement the former schema, and support full-word search.</p>
 <h2 id="adjustable-query-based-encryption">Adjustable query-based encryption</h2>
+<p>Each encryption schema mentioned above is suitable for a specific situation. However, a query can be complex, meaning that it may contain variety of operations. It is hard to use a single schema when processing a private query. The paper proposed adjustable query-based encryption to dynamically choose the encryption schema.</p>
+<p>Its main idea is to encrypt value each data item in one or more onions: that is, each value is dressed in layers of increasingly stronger encryption, like</p>
+<p><img src="/img/image-20220316144121277.png" alt="image-20220316144121277"></p>
+<p>For example, using Onion Eq, users can do equality selection and equality join, while the data looks random if an adversary get the ciphertext. For each layer of each onion, the proxy uses the same key for encrypting values in the same column while using different keys for different tables, columns, onions and onion layers. The adjustable query-based encryption works like onion. Here I&rsquo;ll use the description in paper.</p>
+<blockquote>
+<p>Given a predicate <em>P</em> on column <em>c</em> needed to execute a query on the server, the proxy first establishes what onion layer is needed to compute <em>P</em> on <em>c</em>. If the encryption of <em>c</em> is not already at an onion layer that allows <em>P</em>, the proxy strips off the onion layers to allow <em>P</em> on <em>c</em>, by sending the corresponding onion key to the server. The proxy never decrypts the data past the least-secure encryption onion layer.</p>
+</blockquote>
+<p>The implementation of adjustable query-based encryption in CryptDB is using UDF. When needed, proxy will make a query like following and have database execute it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span><span class="w"> </span><span class="n">Table1</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">Ord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DECRYPT_RND</span><span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">Ord</span><span class="p">,</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">IV</span><span class="p">)</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In the above query, <code>C2-Ord</code> is Onion Ord while <code>K</code> is the key and <code>C2-IV</code> is the random vector used in RND.</p>
+<h2 id="executing-over-encrypted-data">Executing over encrypted data</h2>
+<p>Query execution over encrypted data can be seemed as rewriting the query and having the database execute it with UDF. It can be clearly explained by an example.</p>
+<h3 id="read">Read</h3>
+<p>Consider the read query <code>SELECT ID FROM Employees WHERE Name=‘Alice’</code>. The proxy generates two query.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span><span class="w"> </span><span class="n">Table1</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">Eq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DECRYPT</span><span class="w"> </span><span class="n">RND</span><span class="p">(</span><span class="n">KT1</span><span class="p">,</span><span class="n">C2</span><span class="p">,</span><span class="n">Eq</span><span class="p">,</span><span class="n">RND</span><span class="p">,</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">Eq</span><span class="p">,</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">IV</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">C1</span><span class="o">-</span><span class="n">Eq</span><span class="p">,</span><span class="w"> </span><span class="n">C1</span><span class="o">-</span><span class="n">IV</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Table1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">C2</span><span class="o">-</span><span class="n">Eq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x7</span><span class="p">..</span><span class="n">d</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The first performes the adjustable query-based encryption while the second retrieves the encrypted result. Finally, the proxy decrypts the results from the server using keys $K_{T1,C1,Eq,RND}, K_{T1,C1,Eq,DET}, $ and $K_{T1,C1,Eq,JOIN}$, obtains the result, and returns it to the application. By the way, the database looks like the following.</p>
+<p><img src="/img/image-20220317193838468.png" alt="image-20220317193838468"></p>
+<h3 id="write">Write</h3>
+<p>Write operations include INSERT, UPDATE, DELETE. The proxy applies similar processing on INSERT and DELETE operations while there are some special points when performing UPDATE. However, due to CryptDB&rsquo;s adjustable query-based encryption, it cannot  perform HOM and OPE simultaneously. Therefore, if a column is used in comparisons after it is incremented, the solution is to replace the update query with two queries: a SELECT of the old values to be updated, which the proxy increments and encrypts accordingly, followed by an UPDATE setting the new values. But the strategy may not work well when meeting big data.</p>
+<h2 id="improving-security-and-performance">Improving security and performance</h2>
+<p>The paper proposes some optimizations. I think these are some improvements on implementation, not theory. But&hellip;maybe it&rsquo;s my fault. The improvements can be described as followed. The first four are improvements on security, and the last three are the ones on performance. The main idea of some improvements can be easily understand with subtitle, which will not be introducede below.</p>
+<ul>
+<li><strong>Minimum onion layers.</strong></li>
+<li><strong>In-proxy processing.</strong></li>
+<li><strong>Training mode.</strong> CryptDB provides a training mode, which allows a developer to provide a trace of queries and get the resulting onion encryption layers for each field, along with a warning in case some query is not supported.</li>
+<li><strong>Onion re-encryption.</strong></li>
+<li><strong>Developer annotations.</strong></li>
+<li><strong>Known query set.</strong></li>
+<li><strong>Ciphertext pre-computing and caching</strong>.</li>
+</ul>
+<h1 id="multiple-principals">MULTIPLE PRINCIPALS</h1>
 
     </div>
 
