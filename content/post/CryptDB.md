@@ -151,5 +151,40 @@ The paper proposes some optimizations. I think these are some improvements on im
 * **Known query set.**
 * **Ciphertext pre-computing and caching**.
 
-# MULTIPLE PRINCIPALS
+# Multiple Principals
+
+The schema mentioned above focuses on threat 1, when the adversary only gets full access to the database. Now we consider threat 2 when the application infrastructure and proxy are also untrusted. The main idea of CryptDB is to encrypt different data items with different keys, and enforce the access control policy using chains of keys starting from user passwords and ending in the encryption keys of SQL data items. I think it is just a kind of access control.
+
+According to the schema, the application developer needs to annotate the schema of a database using three steps described below.
+
+* **Step 1.** The developer should define the principle types used in his application using `PRINCTYPE`. There are two classes of principals: external and internal. External principals correspond to end users who explicitly authenticate themselves to the application using a password. An example of principal definition is as followed.
+
+  ```sql
+  PRINCTYPE physical user EXTERNAL;
+  PRINCTYPE user, msg;
+  ```
+
+* **Step 2.** The developer defines the private data and the principals which can access these data using `ENC_FOR`. An example is as followed. The proxy will generate a query where `msgid`'s key is used to encrypt corresponding `subject` and `msgtext`.
+
+  ```sql
+  CREATE TABLE privmsgs (
+  	msgid int,
+  	subject varchar(255) ENC FOR (msgid msg), 
+  	msgtext text ENC FOR (msgid msg) );
+  ```
+
+* **Step 3.** A principal can access to other principals' resource. For example, the members in a group can access group's resource. CryptDB uses `SPEAKS_FOR` to implement the functionality. An example is as followed. `sender_id` of type `user` has access to all keys that `msgid ` of type `msg` has access to.
+
+  ```sql
+  CREATE TABLE privmsgs to (
+  	msgid int, rcpt_id int, sender_id int,
+  	(sender_id user) SPEAKS_FOR (msgid msg),
+  	(rcpt_id user) SPEAKS_FOR (msgid msg) );
+  ```
+
+`SPEAKS_FOR` is implemented through key chains, and it obliviously makes sense.
+
+# Experiment
+
+The result is complex and includes a lot of parts, and my suggestion is referring to the origin paper.
 
