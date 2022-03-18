@@ -16,8 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Ame-ReIori" /><meta name="description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
-However, the paper consider an adversary outside that wants to thieve the data in database." /><meta name="keywords" content="Private computation" />
+<meta name="author" content="Ame-ReIori" /><meta name="description" content="Problem Description The paper considers the situation where users make a query to the database on an online application. Unlike former papers (meaning that according to the paper read formerly), we think that the data stored in the database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper considers an adversary outside that wants to thieve the data in the database." /><meta name="keywords" content="Private computation" />
 
 
 
@@ -41,22 +41,22 @@ However, the paper consider an adversary outside that wants to thieve the data i
 
 
 <meta property="og:title" content="CryptDB" />
-<meta property="og:description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
-However, the paper consider an adversary outside that wants to thieve the data in database." />
+<meta property="og:description" content="Problem Description The paper considers the situation where users make a query to the database on an online application. Unlike former papers (meaning that according to the paper read formerly), we think that the data stored in the database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper considers an adversary outside that wants to thieve the data in the database." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/cryptdb/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-03T14:41:45&#43;08:00" />
 <meta property="article:modified_time" content="2022-03-03T14:41:45&#43;08:00" />
 
 <meta itemprop="name" content="CryptDB">
-<meta itemprop="description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
-However, the paper consider an adversary outside that wants to thieve the data in database."><meta itemprop="datePublished" content="2022-03-03T14:41:45&#43;08:00" />
+<meta itemprop="description" content="Problem Description The paper considers the situation where users make a query to the database on an online application. Unlike former papers (meaning that according to the paper read formerly), we think that the data stored in the database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper considers an adversary outside that wants to thieve the data in the database."><meta itemprop="datePublished" content="2022-03-03T14:41:45&#43;08:00" />
 <meta itemprop="dateModified" content="2022-03-03T14:41:45&#43;08:00" />
-<meta itemprop="wordCount" content="1650">
+<meta itemprop="wordCount" content="1651">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CryptDB"/>
-<meta name="twitter:description" content="Problem Description The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
-However, the paper consider an adversary outside that wants to thieve the data in database."/>
+<meta name="twitter:description" content="Problem Description The paper considers the situation where users make a query to the database on an online application. Unlike former papers (meaning that according to the paper read formerly), we think that the data stored in the database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+However, the paper considers an adversary outside that wants to thieve the data in the database."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,7 +134,7 @@ However, the paper consider an adversary outside that wants to thieve the data i
       <div class="post-meta">
         <span class="post-time"> 2022-03-03 </span>
         
-          <span class="more-meta"> 1650 words </span>
+          <span class="more-meta"> 1651 words </span>
           <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -147,7 +147,7 @@ However, the paper consider an adversary outside that wants to thieve the data i
   <ul>
     <li><a href="#problem-description">Problem Description</a>
       <ul>
-        <li><a href="#challenages-and-main-idea">Challenages and main idea</a></li>
+        <li><a href="#challenges-and-main-idea">Challenges and main idea</a></li>
       </ul>
     </li>
     <li><a href="#system-overview">System Overview</a>
@@ -185,30 +185,30 @@ However, the paper consider an adversary outside that wants to thieve the data i
 </div>
     <div class="post-content">
       <h1 id="problem-description">Problem Description</h1>
-<p>The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.</p>
-<p>However, the paper consider an adversary outside that wants to thieve the data in database. The adversary may have access to database, snoop on private data, or even access all data on disk and in memory. The problem is how to avoid the theft. Considering the cost on system deployment and client-side computation, the paper presents CryptDB, a system that explores an intermediate design point to provide confidentiality for applications that use database management systems, to solve it.</p>
-<p>There are two threats which CryptDB should address.</p>
+<p>The paper considers the situation where users make a query to the database on an online application. Unlike former papers (meaning that according to the paper read formerly), we think that the data stored in the database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.</p>
+<p>However, the paper considers an adversary outside that wants to thieve the data in the database. The adversary may have access to the database, snoop on private data, or even access all data on disk and in memory. The problem is how to avoid theft. Considering the cost of system deployment and client-side computation, the paper presents CryptDB, a system that explores an intermediate design point to provide confidentiality for applications that use database management systems, to solve it.</p>
+<p>There are two threats that CryptDB should address.</p>
 <ul>
-<li>If the adversary is a curious database administrator (DBA) , how to avoid him from learning private data.</li>
-<li>If the adversary gets complete control of application and servers, how to avoid him from learning private data.</li>
+<li>If the adversary is a curious database administrator (DBA), how to avoid him from learning private data.</li>
+<li>If the adversary gets complete control of applications and servers, how to avoid him from learning private data.</li>
 </ul>
 <p>In the first case, CryptDB can prevent DBA from learning any private data through some encryption schema; In the second case, <strong>CryptDB cannot provide any guarantees for users that are logged into the application during an attack, but can still ensure the confidentially of logger-out users' data</strong>.</p>
-<p>It seems that CryptDB provides a good schema to solve problems in first case. However, there are still several problems, including computation and communication cost. Besides, CryptDB doesn&rsquo;t provide a complete schema for the second case.</p>
+<p>It seems that CryptDB provides a good schema to solve problems in the first case. However, there are still several problems, including computation and communication costs. Besides, CryptDB doesn&rsquo;t provide a complete schema for the second case.</p>
 <p>In this blog, we may follow CryptDB&rsquo;s idea and make a sight on how it solves these problems.</p>
-<h2 id="challenages-and-main-idea">Challenages and main idea</h2>
-<p>There are two challenages when solving the threats.</p>
+<h2 id="challenges-and-main-idea">Challenges and main idea</h2>
+<p>There are two challenges when solving the threats.</p>
 <ul>
 <li>The first lies in the tension between minimizing the amount of confidential information revealed to the DBMS server and the ability to efficiently execute a variety of queries.</li>
 <li>The second is to minimize the amount of data leaked when an adversary compromises the application server in addition to the DBMS server.</li>
 </ul>
-<p>CryptDB addresses these challenages with three key ideas:</p>
+<p>CryptDB addresses these challenges with three key ideas:</p>
 <ul>
 <li>The first is executing SQL queries over encrypted data with SQL-aware encryption. Different private operations can be implemented with different encryption schemas. For example, SUM can be implemented with homomorphic encryption.</li>
-<li>The second is adjustable query-based encryption. I think it is the same as the first idea. We customize each operation with different encryption schema and encrypt data with these schemas, then we should have a scheduler make a reasonable plan for adjusting operations with schema.</li>
-<li>The third is chain encryption keys to user password. Actually, it is a kind of access control.</li>
+<li>The second is adjustable query-based encryption. I think it is the same as the first idea. We customize each operation with a different encryption schema and encrypt data with these schemas, then we should have a scheduler make a reasonable plan for adjusting operations with schema.</li>
+<li>The third is chain encryption keys to user passwords. It is a kind of access control.</li>
 </ul>
 <h1 id="system-overview">System Overview</h1>
-<p>The construction is as followed. CryptDB add database proxy to the origin system, which encrypts and decrypts all data, and changes query operations. There is some strategies when encrypting data due to the second threat. Then, we will make a sight on  what the security and brief approach is in two threats.</p>
+<p>The construction is as followed. CryptDB adds database proxy to the origin system, which encrypts and decrypts all data, and changes query operations. There are some strategies when encrypting data due to the second threat. Then, we will make sight on what the security and brief approach are in two threats.</p>
 <p><img src="/img/image-20220304162347255.png" alt="image-20220304162347255"></p>
 <h2 id="threat-1">Threat 1</h2>
 <p>Threat 1 is the situation where the adversary has full access to the data stored in the DBMS server. The paper consider the adversary to be passive, or we say, semi-honest. CryptDB protects data content and names of columns and tables, but it doesn&rsquo;t protect overall table structure, the number of rows, the type of columns, or the approximate size of data in bytes.</p>
