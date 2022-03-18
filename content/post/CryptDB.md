@@ -7,37 +7,37 @@ draft: false
 
 # Problem Description
 
-The paper considers the situation where users make a query to database on an online application. Different with former papers (meaning that according to the paper read formerly), we think that the data stored in database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
+The paper considers the situation where users make a query to the database on an online application. Unlike former papers (meaning that according to the paper read formerly), we think that the data stored in the database belong to users and want to avoid the database from learning any knowledge of these data. Then, the proposed schema is having the database store encrypted data.
 
-However, the paper consider an adversary outside that wants to thieve the data in database. The adversary may have access to database, snoop on private data, or even access all data on disk and in memory. The problem is how to avoid the theft. Considering the cost on system deployment and client-side computation, the paper presents CryptDB, a system that explores an intermediate design point to provide confidentiality for applications that use database management systems, to solve it. 
+However, the paper considers an adversary outside that wants to thieve the data in the database. The adversary may have access to the database, snoop on private data, or even access all data on disk and in memory. The problem is how to avoid theft. Considering the cost of system deployment and client-side computation, the paper presents CryptDB, a system that explores an intermediate design point to provide confidentiality for applications that use database management systems, to solve it. 
 
-There are two threats which CryptDB should address.
+There are two threats that CryptDB should address.
 
-* If the adversary is a curious database administrator (DBA) , how to avoid him from learning private data.
-* If the adversary gets complete control of application and servers, how to avoid him from learning private data.
+* If the adversary is a curious database administrator (DBA), how to avoid him from learning private data.
+* If the adversary gets complete control of applications and servers, how to avoid him from learning private data.
 
 In the first case, CryptDB can prevent DBA from learning any private data through some encryption schema; In the second case, **CryptDB cannot provide any guarantees for users that are logged into the application during an attack, but can still ensure the confidentially of logger-out users' data**.
 
-It seems that CryptDB provides a good schema to solve problems in first case. However, there are still several problems, including computation and communication cost. Besides, CryptDB doesn't provide a complete schema for the second case.
+It seems that CryptDB provides a good schema to solve problems in the first case. However, there are still several problems, including computation and communication costs. Besides, CryptDB doesn't provide a complete schema for the second case.
 
 In this blog, we may follow CryptDB's idea and make a sight on how it solves these problems.
 
-## Challenages and main idea
+## Challenges and main idea
 
-There are two challenages when solving the threats.
+There are two challenges when solving the threats.
 
 * The first lies in the tension between minimizing the amount of confidential information revealed to the DBMS server and the ability to efficiently execute a variety of queries.
 * The second is to minimize the amount of data leaked when an adversary compromises the application server in addition to the DBMS server.
 
-CryptDB addresses these challenages with three key ideas:
+CryptDB addresses these challenges with three key ideas:
 
 * The first is executing SQL queries over encrypted data with SQL-aware encryption. Different private operations can be implemented with different encryption schemas. For example, SUM can be implemented with homomorphic encryption.
-* The second is adjustable query-based encryption. I think it is the same as the first idea. We customize each operation with different encryption schema and encrypt data with these schemas, then we should have a scheduler make a reasonable plan for adjusting operations with schema.
-* The third is chain encryption keys to user password. Actually, it is a kind of access control.
+* The second is adjustable query-based encryption. I think it is the same as the first idea. We customize each operation with a different encryption schema and encrypt data with these schemas, then we should have a scheduler make a reasonable plan for adjusting operations with schema.
+* The third is chain encryption keys to user passwords. It is a kind of access control.
 
 # System Overview
 
-The construction is as followed. CryptDB add database proxy to the origin system, which encrypts and decrypts all data, and changes query operations. There is some strategies when encrypting data due to the second threat. Then, we will make a sight on  what the security and brief approach is in two threats.
+The construction is as followed. CryptDB adds database proxy to the origin system, which encrypts and decrypts all data, and changes query operations. There are some strategies when encrypting data due to the second threat. Then, we will make sight on what the security and brief approach are in two threats.
 
 ![image-20220304162347255](/img/image-20220304162347255.png)
 
